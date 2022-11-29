@@ -66,7 +66,7 @@ console.log(data);
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-6 d-flex align-items-center">
+                  <div className="col-md-6 d-flex align-items -center">
                     <div className="product p-4">
                       <div className="d-flex justify-content-between align-items-center">
                         <i className="fa fa-shopping-cart text-muted" />
