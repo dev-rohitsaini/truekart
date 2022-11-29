@@ -3,27 +3,34 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BounceLoader } from "react-spinners";
 import AddToCartButton from "../comman/AddToCartButton";
+import Suggestions from "../comman/Suggestions";
 
 const ProductDetails = () => {
   const params = useParams();
   const [data, setData] = useState([]);
   const imgRef = useRef();
-  const productId =  params.id;
-
+  // let [categoryId,setCategoryId] =useState(-1) ;
+  const productId = params.id;
   const fetchData = async () => {
-    const apiData = await axios.get(
+    await axios.get(
       "https://api.escuelajs.co/api/v1/products/" + productId
-    );
-    setData(apiData.data);
+    ).then((apiData)=>{
+      setData(apiData.data);
+      // setCategoryId(data.category.id);
+    }).catch((err)=>{
+      alert(err)
+    })
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
+console.log(data);
   const changeImage = (e) => {
     imgRef.current.src = e.target.getAttribute("src");
   };
+ 
+  
   return (
     <div
       style={{ minHeight: "600px" }}
@@ -59,7 +66,7 @@ const ProductDetails = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-6 d-flex align-items-center">
                     <div className="product p-4">
                       <div className="d-flex justify-content-between align-items-center">
                         <i className="fa fa-shopping-cart text-muted" />
@@ -76,7 +83,7 @@ const ProductDetails = () => {
                           Price: <strong>${data.price}.00 &nbsp;</strong>
                         </div>
                       </div>
-                      <div className="price d-flex r">Rating :</div>
+                      {/* <div className="price d-flex r">Rating : {data.price}.</div> */}
                       <AddToCartButton productid={data} />
                     </div>
                   </div>
@@ -86,6 +93,10 @@ const ProductDetails = () => {
           </div>
         </div>
       )}
+      {/* //carousel */}
+      {/* <div>
+        <Suggestions id={categoryId} type={"categories"} />
+      </div> */}
     </div>
   );
 };
