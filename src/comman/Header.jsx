@@ -5,12 +5,16 @@ import { homePage } from "../components/feature/products/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FaSearch } from "react-icons/fa";
+import { DebounceInput } from "react-debounce-input";
 const Header = () => {
   const dispatch = useDispatch();
   const getCartCount = useSelector((state) => state.cart.cart);
   const handleClick = (e) => {
     dispatch(homePage());
   };
+  const search =(e)=>{
+console.log(e.target.value);
+  }
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container">
@@ -47,18 +51,21 @@ const Header = () => {
               <form className="form-inline mr-2 my-lg-2 col-lg-12 ">
                 <div className="input-group input-group-sm">
                   <div>
-                    <input
-                      type="text"
-                      className="form-control "
-                      aria-label="Small"
-                      aria-describedby="inputGroup-sizing-sm"
-                      placeholder="Search..."
-                    />
+                  <DebounceInput
+            type="text"
+            minLength={3}
+            placeholder={"Search"}
+            debounceTimeout={1000}
+            onChange={search}
+            />
                     <div className="input-group-append"></div>
                   </div>
                 </div>
               </form>
             </li>
+          
+
+            
             <li className="nav-item" style={{ marginLeft: "14px" }}>
               <FaSearch className="text-white " />
             </li>
