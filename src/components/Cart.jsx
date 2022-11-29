@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   decrementQuantity,
   incrementQuantity,
-  removeItem
+  removeItem,
 } from "../components/feature/products/cart";
 import { FaTrash, FaMinus, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -20,8 +20,8 @@ const Cart = () => {
   data.map((item) => {
     sum += item.price * item.quantity;
   });
-  let shippingPrice = (sum === 0) ? 0 : 30;
-  let totalPrice=(shippingPrice + sum);
+  let shippingPrice = sum === 0 ? 0 : 30;
+  let totalPrice = shippingPrice + sum;
   return (
     <>
       <section className="h-100 gradient-custom">
@@ -33,7 +33,6 @@ const Cart = () => {
                   <h5 className="mb-0">Cart - {data.length} items</h5>
                 </div>
                 {stateData.map((item, i) => (
-                 
                   <div className="card-body" key={i}>
                     {/* Single item */}
                     <div className="row">
@@ -63,7 +62,9 @@ const Cart = () => {
                           className="btn btn-danger btn-sm me-1 mb-2"
                           data-mdb-toggle="tooltip"
                           title="Remove item"
-                          onClick={()=>{dispatch(removeItem(item.id))}}
+                          onClick={() => {
+                            dispatch(removeItem(item.id));
+                          }}
                         >
                           <i className="fas fa-trash" />
                           <FaTrash size="" />
@@ -89,8 +90,9 @@ const Cart = () => {
                               <FaMinus size="" />
                             </button>
 
-                        
-                            <span  className="form-control text-center">{item.quantity}</span>
+                            <span className="form-control text-center">
+                              {item.quantity}
+                            </span>
 
                             <button
                               className="btn btn-secondary px-3 ms-2"

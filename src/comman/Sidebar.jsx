@@ -6,7 +6,6 @@ const Sidebar = (props) => {
     const currentId = e.target.getAttribute("data-id");
     props.handleClick(currentId);
     setCurrentSideLink(currentId);
-
   };
   const handleChange = (e) => {
     props.setRecordsPerPage(e.target.value);
@@ -30,7 +29,7 @@ const Sidebar = (props) => {
                   element.id == currentSideLink ? "active" : currentSideLink
                 }`}
               >
-                <a data-id={element.id} >{element.name}</a>
+                <a data-id={element.id}>{element.name}</a>
               </li>
             ))}
           </ul>

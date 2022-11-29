@@ -12,25 +12,25 @@ const ProductDetails = () => {
   // let [categoryId,setCategoryId] =useState(-1) ;
   const productId = params.id;
   const fetchData = async () => {
-    await axios.get(
-      "https://api.escuelajs.co/api/v1/products/" + productId
-    ).then((apiData)=>{
-      setData(apiData.data);
-      // setCategoryId(data.category.id);
-    }).catch((err)=>{
-      alert(err)
-    })
+    await axios
+      .get("https://api.escuelajs.co/api/v1/products/" + productId)
+      .then((apiData) => {
+        setData(apiData.data);
+        // setCategoryId(data.category.id);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-console.log(data);
+  console.log(data);
   const changeImage = (e) => {
     imgRef.current.src = e.target.getAttribute("src");
   };
- 
-  
+
   return (
     <div
       style={{ minHeight: "600px" }}

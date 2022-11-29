@@ -12,9 +12,9 @@ const Header = () => {
   const handleClick = (e) => {
     dispatch(homePage());
   };
-  const search =(e)=>{
-console.log(e.target.value);
-  }
+  const search = (e) => {
+    console.log(e.target.value);
+  };
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container">
@@ -41,7 +41,9 @@ console.log(e.target.value);
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to={"/cart"}>Cart</Link>
+              <Link className="nav-link" to={"/cart"}>
+                Cart
+              </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link">Contact</Link>
@@ -51,37 +53,40 @@ console.log(e.target.value);
               <form className="form-inline mr-2 my-lg-2 col-lg-12 ">
                 <div className="input-group input-group-sm">
                   <div>
-                  <DebounceInput
-            type="text"
-            minLength={3}
-            placeholder={"Search"}
-            debounceTimeout={1000}
-            onChange={search}
-            />
+                    <DebounceInput
+                      type="text"
+                      minLength={3}
+                      placeholder={"Search"}
+                      debounceTimeout={1000}
+                      onChange={search}
+                    />
                     <div className="input-group-append"></div>
                   </div>
                 </div>
               </form>
             </li>
-          
-
-            
             <li className="nav-item" style={{ marginLeft: "14px" }}>
               <FaSearch className="text-white " />
             </li>
           </ul>
-
-          <div className="ml-5" >
+          <div className="ml-5">
             <div className="shopping-cart">
-             <Link to={"/cart"}> <FontAwesomeIcon
-                className="text-white ml-3"
-                size="lg"
-                icon={faCartShopping}
-              />
-             </Link>
+              <Link to={"/cart"}>
+                {" "}
+                <FontAwesomeIcon
+                  className="text-white ml-3"
+                  size="lg"
+                  icon={faCartShopping}
+                />
+              </Link>
             </div>
           </div>
-          <span className="text-danger p-0 " style={{"margin":" -3px -9px 23px 0px"}}>{getCartCount.length || 0}</span>
+          <span
+            className="text-danger p-0 "
+            style={{ margin: " -3px -9px 23px 0px" }}
+          >
+            {getCartCount.length || 0}
+          </span>
         </div>
       </div>
     </nav>
