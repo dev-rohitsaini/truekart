@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <section className="jumbotron text-center ">
       <div className="container">
-        <h1 className="jumbotron-heading bg-transparent mb-3"> The One-stop Shopping Destination</h1>
+        <h1 className="jumbotron-heading bg-transparent mb-3 text-light"> The One-stop Shopping Destination</h1>
         <div className="row">
             <div className="col-6 ">
               <div className="mb-0 border-left-1 rounded-3 p-2 m-2 mt-4"> 

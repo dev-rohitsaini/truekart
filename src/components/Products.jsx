@@ -95,9 +95,9 @@ const Products = () => {
     <>
       <div
         style={{ minHeight: "400px" }}
-        className="d-flex align-items-center justify-content-center gradient-custom"
+        className="d-flex align-items-center justify-content-center gradient-custom m-0"
       >
-        <div className="container">
+        <div className="container ">
           <div className="row">
             <Sidebar
               totalData={totalData}
