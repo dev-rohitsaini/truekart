@@ -121,8 +121,8 @@ const Products = () => {
                 <div className="row">
                   {currentRecords.map((productData) => (
                     <div
-                      className="card m-3"
-                      style={{ width: "18rem" }}
+                      className="card m-2"
+                      style={{ width: "16rem" }}
                       key={productData.id}
                     >
                       <div className="product-image p-3">
