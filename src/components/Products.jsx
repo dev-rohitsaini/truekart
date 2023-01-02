@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../css/Products.css";
-import axios from "axios";
+import axios, { all } from "axios";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BounceLoader } from "react-spinners";
@@ -8,6 +8,7 @@ import Pagination from "../comman/Pagination.jsx";
 import Sidebar from "../comman/Sidebar.jsx";
 import AddToCartButton from "../comman/AddToCartButton";
 import { useMemo } from "react";
+import allData from "./feature/products/data";
 
 const Products = () => {
   const pageChange = useSelector((state) => state.productPages.value);
@@ -26,18 +27,27 @@ const Products = () => {
   // Records to be displayed on the current page
 
   //fetching all data-------------------
-  const fetchData = async () => {
-    await axios
-      .get("https://api.escuelajs.co/api/v1/products")
-      .then((apiData) => {
-        setData(apiData.data);
-        setTotalData(data.length);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  };
-
+  // const fetchData = async () => {
+  //   await axios
+  //     .get("https://api.escuelajs.co/api/v1/products")
+  //     .then((apiData) => {
+  //       setData(apiData.data);
+  //       setTotalData(data.length);
+  //     })
+  //     .catch((err) => {
+  //       setData(allData);
+  //       setTotalData(data.length);
+  //       console.log(allData)
+  //       // alert(err);
+  //     });
+  // };
+//As api is not working assiging static data
+const fetchData = async () => {
+  await axios
+      setData(allData.data);
+      setTotalData(data.length);
+    }
+    
   //getting categories--------------
   const getCategories = async () => {
     await axios
@@ -81,6 +91,7 @@ const Products = () => {
   const handleClick = (catId) => {
     categoryFilter(catId);
   };
+  //working on sidebar using memmo finding useMemo caeses;-------------
   const sideBar=useMemo(()=>{
     return( <Sidebar
      totalData={totalData}
@@ -110,7 +121,14 @@ const Products = () => {
       >
         <div className="container ">
           <div className="row">
-          {sideBar}
+          {<Sidebar
+     totalData={totalData}
+     currentLength={currentPage}
+     cat={cat}
+     handleClick={handleClick}
+     recordsPerPage={recordsPerPage}
+     setRecordsPerPage={setRecordsPerPage}
+   />}
             {noDataFound ? (
               <div className="col-sm-9 col-lg-9 col-md-9 mt-3 ">
                 <div
