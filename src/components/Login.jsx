@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import "../css/Login.css";
 const Login = () => {
@@ -5,16 +6,57 @@ const Login = () => {
     email: "",
     password: "",
   };
+  const emailHandle =(email)=>{
+    if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)){return true}
+    return false;
+
+  }
+  const emptyValidation =(data)=>{
+    if(data.email===""){
+      alert("Email field can not be empty!");
+      return false;
+    }else{
+      if(!(emailHandle(data.email))){
+          alert("Please enter a valid  email address");
+          return false;
+      }
+    }
+
+    if(data.password===""){
+      alert("Password field can not be empty!");
+      return false;
+    }
+    return true;
+  }
   const [data, setData] = useState(formData);
 
   const handleChange = (e) => {
-    // console.log(e.target.value);
-    // setData({...data,[e.target.id]:e.target.value})
+    setData({...data,[e.target.id]:e.target.value})
   };
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
+    const value= emptyValidation(data);
+    if(value){
+      authenticate(data)
+    }
   };
+
+  const authenticate = async (data)=>{
+      await axios.get("https://api.escuelajs.co/api/v1/auth/login",{
+        params:{
+          data:data,
+        }
+      }).then((res)=>{
+        console.log(res);
+      }).catch((err)=>{
+        console.log(err);
+      })
+
+  }
+
+
   return (
     <>
       <section className="vh-100 gradient-custom">
@@ -26,7 +68,7 @@ const Login = () => {
                 style={{ borderRadius: "1rem" }}
               >
                 <div className="card-body p-5 text-center">
-                  <form action="" method="get" onSubmit={handleSubmit}>
+                  <form action="" method="GET" onSubmit={handleSubmit}>
                     <h3 className="mb-5">Sign in</h3>
                     <div className="form-outline mb-4">
                       <input

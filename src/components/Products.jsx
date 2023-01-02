@@ -7,6 +7,7 @@ import { BounceLoader } from "react-spinners";
 import Pagination from "../comman/Pagination.jsx";
 import Sidebar from "../comman/Sidebar.jsx";
 import AddToCartButton from "../comman/AddToCartButton";
+import { useMemo } from "react";
 
 const Products = () => {
   const pageChange = useSelector((state) => state.productPages.value);
@@ -80,6 +81,17 @@ const Products = () => {
   const handleClick = (catId) => {
     categoryFilter(catId);
   };
+  const sideBar=useMemo(()=>{
+    return( <Sidebar
+     totalData={totalData}
+     currentLength={currentPage}
+     cat={cat}
+     handleClick={handleClick}
+     recordsPerPage={recordsPerPage}
+     setRecordsPerPage={setRecordsPerPage}
+   />
+    )
+   },[])
   //add to cart -------------------
   if (loading === true)
     return (
@@ -90,7 +102,6 @@ const Products = () => {
         <BounceLoader color="grey" size={55} />
       </div>
     );
-
   return (
     <>
       <div
@@ -99,14 +110,7 @@ const Products = () => {
       >
         <div className="container ">
           <div className="row">
-            <Sidebar
-              totalData={totalData}
-              currentLength={currentPage}
-              cat={cat}
-              handleClick={handleClick}
-              recordsPerPage={recordsPerPage}
-              setRecordsPerPage={setRecordsPerPage}
-            />
+          {sideBar}
             {noDataFound ? (
               <div className="col-sm-9 col-lg-9 col-md-9 mt-3 ">
                 <div
