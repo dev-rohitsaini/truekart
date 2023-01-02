@@ -9,38 +9,43 @@ const Pagination = (props) => {
   const prevPage = () => {
     if (currentPage !== 1) props.setCurrentPage(currentPage - 1);
   };
-
-  return (
-    <>
-      <nav aria-label="Page navigation example">
-        <ul className="pagination justify-content-center">
-          <li className="page-item ">
-            <a className="page-link" onClick={prevPage}>
-              Previous
-            </a>
-          </li>
-          {pageNumbers.map((pgNumber) => (
-            <li
-              key={pgNumber}
-              className={`page-item ${currentPage == pgNumber ? "active" : ""}`}
-            >
-              <a
-                className="page-link"
-                onClick={() => props.setCurrentPage(pgNumber)}
-              >
-                {pgNumber}
+  if (pageNumbers.length == 0) {
+    return "";
+  } else {
+    return (
+      <>
+        <nav aria-label="Page navigation example">
+          <ul className="pagination justify-content-center">
+            <li className="page-item ">
+              <a className="page-link" onClick={prevPage}>
+                Previous
               </a>
             </li>
-          ))}
-          <li className="page-item">
-            <a className="page-link" onClick={nextPage}>
-              Next
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </>
-  );
+            {pageNumbers.map((pgNumber) => (
+              <li
+                key={pgNumber}
+                className={`page-item ${
+                  currentPage == pgNumber ? "active" : ""
+                }`}
+              >
+                <a
+                  className="page-link"
+                  onClick={() => props.setCurrentPage(pgNumber)}
+                >
+                  {pgNumber}
+                </a>
+              </li>
+            ))}
+            <li className="page-item">
+              <a className="page-link" onClick={nextPage}>
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </>
+    );
+  }
 };
 
 export default Pagination;
