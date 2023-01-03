@@ -9,8 +9,8 @@ const Login = () => {
   const emailHandle =(email)=>{
     if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)){return true}
     return false;
-
   }
+
   const emptyValidation =(data)=>{
     if(data.email===""){
       alert("Email field can not be empty!");
@@ -21,7 +21,6 @@ const Login = () => {
           return false;
       }
     }
-
     if(data.password===""){
       alert("Password field can not be empty!");
       return false;
@@ -43,9 +42,9 @@ const Login = () => {
     }
     
   };
-
+const url ="https://api.escuelajs.co/api/v1/auth/login";
   const authenticate = async (data)=>{
-      await axios.get("https://api.escuelajs.co/api/v1/auth/login",{
+      await axios.get(url,{
         params:{
           data:data,
         }
