@@ -34,13 +34,14 @@ const Login = () => {
     setData({...data,[e.target.id]:e.target.value})
   };
 
-  
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     const value= emptyValidation(data);
     if(value){
       authenticate(data)
     }
+    
   };
 
   const authenticate = async (data)=>{
@@ -50,8 +51,8 @@ const Login = () => {
         }
       }).then((res)=>{
         console.log(res);
-      }).catch((err)=>{
-        console.log(err);
+      }).catch((errs)=>{
+        console.log(errs);
       })
 
   }
